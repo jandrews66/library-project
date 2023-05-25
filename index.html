@@ -9,6 +9,31 @@
     <script src="app.js" defer></script>
 </head>
 <body>
+    <button id="addBtn">Add Book</button>
+    <form id="form">
+        <ul>
+            <li>
+                <label for="book_title">Title:</label>
+                <input type="text" id="title" name="title" required>
+            </li>
+            <li>
+                <label for="book_author">Author:</label>
+                <input type="text" id="author" name="author" required>
+            </li>
+            <li>
+                <label for="pages">Number of Pages</label>
+                <input type="tel" id="pages" name="pages" />
+            </li>
+            <li>
+                <label for="have_read">Read?:</label>
+                <input type="checkbox" id="have_read" name="have_read" value="yes">
+            </li>
+            <li>
+                <button type="submit" >Submit</button>
+            </li>
+        </ul>
+
+    </form>
     <div id="container">
 
     </div>
