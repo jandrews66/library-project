@@ -9,6 +9,9 @@
     <script src="app.js" defer></script>
 </head>
 <body>
+    <header>
+        <h1>My Library</h1>
+    </header>
     <button id="addBtn">Add Book</button>
     <form id="form">
         <ul>
@@ -22,14 +25,14 @@
             </li>
             <li>
                 <label for="pages">Number of Pages</label>
-                <input type="tel" id="pages" name="pages" />
+                <input type="number" id="pages" name="pages" />
             </li>
             <li>
-                <label for="have_read">Read?:</label>
+                <label for="have_read">Mark as read:</label>
                 <input type="checkbox" id="have_read" name="have_read" value="yes">
             </li>
             <li>
-                <button type="submit" >Submit</button>
+                <button type="submit" id="submit_btn">Submit</button>
             </li>
         </ul>
 

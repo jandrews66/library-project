@@ -1,3 +1,108 @@
-form {
-    display: none;
+* {
+    padding: 0;
+    margin: 0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  }
+
+body {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
 }
+
+header {
+    background-color: rgb(214, 214, 214);
+    height: 150px;
+    grid-column: 1/4;
+}
+
+h1 {
+    margin: 2% 8%;
+
+}
+#addBtn {
+    border: none;
+    font-size: 22px;
+    display: grid;
+    grid-column: 2/3;
+    align-self: center;
+    justify-self: center;
+    padding: 10px 20px;
+    margin: 20px;
+    background-color: rgb(214, 214, 214);
+    cursor:pointer;
+
+
+}
+
+form {
+    position: absolute;
+    left: 41%;
+    top: 40%;
+    background-color: rgb(156, 142, 237);
+    padding: 10px;
+
+}
+
+ul {
+    list-style: none;
+}
+li {
+    padding: 10px;
+}
+
+input {
+    padding: 5px;
+    width: 200px;
+    border-radius: 4px;
+    border-color: rgb(98, 98, 98);
+    border-width: 2px;
+    border-style: solid;
+}
+
+label {
+    position: relative;
+}
+
+label,input{
+    display:flex;
+    flex-direction:column;
+    padding-bottom: 5px;
+}
+
+#submit_btn {
+    border: none;
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: rgb(214, 214, 214);
+    cursor:pointer;
+}
+
+input[type=checkbox] {
+    position: absolute;
+    left: 30px;
+    top: 247px;
+    transform: scale(1.5);
+    cursor:pointer;
+  }
+
+ #card {
+    background-color: rgb(255, 111, 0);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+ }
+
+ #container {
+    display: grid;
+    grid-column: 2/3;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+
+ }
+
+ .deleteBtn,
+ .readBtn {
+    cursor:pointer;
+    padding: 5px;
+ }

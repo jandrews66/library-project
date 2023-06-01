@@ -12,17 +12,16 @@ function Book(title, author, pages, haveRead) {
     this.haveRead = haveRead
 
 }
-const bookOne = new Book("The Hobbit", "Tolkien", "1000", "No");
-const bookTwo = new Book("LOTR", "Tolkien", "500", "No");
+const bookOne = new Book("The Hobbit", "Tolkien", "1000", "Unread");
+const bookTwo = new Book("LOTR", "Tolkien", "500", "Read");
 myLibrary.push(bookOne);
 myLibrary.push(bookTwo);
-
-function addBookToLibrary(){
-}
 
 function displayLibrary(){
     removeExisting();
     const listTitles = myLibrary.map(book => createCard(book));
+    createDeleteBtn()
+    createReadBtn()
 }
 
 function removeExisting(){
@@ -42,33 +41,47 @@ function createCard(book){
     card.appendChild(heading);
 
     const para = document.createElement("p");
-    para.innerHTML = book.author + `<br>` + book.pages
+    para.innerHTML = "by " + book.author + `<br>` + book.pages + " pages"
     para.id = "bookDetails";
     card.appendChild(para);
+
+    const readBtn = document.createElement("button");
+    readBtn.innerHTML = book.haveRead
+    readBtn.className ="readBtn";
+    card.appendChild(readBtn);
 
     const btn = document.createElement("button");
     btn.innerHTML = "Delete";
     btn.className ="deleteBtn";
     card.appendChild(btn);
-    createDeleteBtn()
 }
 
 function createDeleteBtn() {
     const deleteButtons = document.getElementsByClassName("deleteBtn");
     for (let deleteButton of deleteButtons){ 
         deleteButton.addEventListener('click', (e) => {
-            //e.currentTarget.parentNode.remove();        
-            let titleToRemove = e.target.parentNode.firstElementChild.innerHTML
-            console.log(titleToRemove)
+            const titleToRemove = e.currentTarget.parentNode.firstElementChild.innerHTML
             index = myLibrary.findIndex(x => x.title === titleToRemove)
-            console.log(index)
             myLibrary.splice(index, 1);
+            displayLibrary()
         })
     }
 }
 
-function testClick(){
-    console.log("click")
+function createReadBtn() {
+    const readButtons = document.getElementsByClassName("readBtn");
+    for (let readButton of readButtons){
+        readButton.addEventListener('click', (e) => {
+            const readTitle = e.currentTarget.parentNode.firstElementChild.innerHTML
+            index = myLibrary.findIndex(x => x.title === readTitle)
+            if (myLibrary[index].haveRead === "Read"){
+                myLibrary[index].haveRead = "Unread"
+            } else { 
+                myLibrary[index].haveRead = "Read"
+            }
+            displayLibrary();
+        })
+    }
 }
 
 addBookBtn.addEventListener('click', () => {
@@ -81,19 +94,27 @@ addBookBtn.addEventListener('click', () => {
     }
 });
 
-let form = document.getElementById('form');
+const form = document.getElementById('form');
+form.style.display = 'none';
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     let read = "";
      
     if (have_read.checked === true) {
-        read = "Yes"
+        read = "Read"
     } else {
-        read = "No"
+        read = "Unread"
     }
     e = new Book(title.value, author.value, pages.value, read);
     myLibrary.push(e);
     displayLibrary();
     form.reset();
 })
+
+document.addEventListener('click', function handleClickOutsideForm(event) {
+  
+    if (!form.contains(event.target) && !addBookBtn.contains(event.target)) {
+      form.style.display = 'none';
+    }
+  });
