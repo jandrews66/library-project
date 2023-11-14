@@ -2,7 +2,7 @@ let myLibrary = [];
 
 const title = document.getElementById("title");
 const author = document.getElementById("author");
-const addBookBtn = document.getElementById('addBtn')
+const addBookBtn = document.getElementById("addBtn")
 const container = document.getElementById("container");
 
 function Book(title, author, pages, haveRead) {
@@ -98,6 +98,17 @@ const form = document.getElementById('form');
 form.style.display = 'none';
 
 form.addEventListener("submit", (e) => {
+
+    if (!title.validity.valid){
+        showTitleError();
+        e.preventDefault();
+        return
+    } else if (!constraint.test(author.value)){
+        showAuthorError();
+        e.preventDefault();
+        return
+    }
+
     e.preventDefault();
     let read = "";
      
@@ -118,3 +129,43 @@ document.addEventListener('click', function handleClickOutsideForm(event) {
       form.style.display = 'none';
     }
   });
+
+  const titleError = document.querySelector("#title + span.error")
+  title.addEventListener("input", (event) =>{
+    if (title.validity.valid){
+        titleError.textContent = "";
+        titleError.className = "error";
+    } else {
+        showTitleError();
+    }
+
+  })
+
+  function showTitleError(){
+    if (title.validity.valueMissing){
+        titleError.textContent = "You need to add a title"
+    } else if (title.validity.tooShort){
+        titleError.textContent = "Too short"
+    }
+
+    titleError.className = "error active";
+  }
+
+  const authorError = document.querySelector("#author + span.error")
+
+  const constraint = new RegExp("^[A-Za-z]+$")
+
+  author.addEventListener("input", (event) =>{
+    if (constraint.test(author.value)){
+        author.setCustomValidity("");
+        authorError.textContent = author.validationMessage;
+    } else {
+        showAuthorError();
+    }
+
+  })
+
+  function showAuthorError(){
+    author.setCustomValidity("use alphabet characters only")
+    authorError.textContent = author.validationMessage;
+  }
